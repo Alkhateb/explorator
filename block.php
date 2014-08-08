@@ -17,6 +17,7 @@ else
 $totalOut = 0;
 $transactions = "";
 $stakeValue = "";
+$addressValue = "";
 $stakeAmount = 0;
 foreach($blockInfo['tx'] as $tx)
 {
@@ -35,11 +36,17 @@ foreach($blockInfo['tx'] as $tx)
     }
     else
     {
-        $transactions .= "<tr><td><a href=\"tx.php?id=" . $tx['txid'] . "\">" . substr($tx['txid'], 0, 25) . "...</a></td>";
         foreach($tx['vout'] as $vout)
         {
+            //echo "<pre>" . print_r($vout, 1) . "</pre>";
+            if(array_key_exists('addresses', $vout['scriptPubKey']))
+            {
+                $address =  $vout['scriptPubKey']['addresses'][0];
+                $addressValue .=  "<a href=\"address.php?address=" . $address . "\">" . $address . "</a> - " . $vout['value'] . "</br>";
+            }
             $totalOut += $vout['value'];
         }
+        $transactions .= "<td>$totalOut</td><td><a href=\"address.php?address=$address\">$address</a> - $totalOut</td><td>$addressValue</td></tr>";
     }
 }
 ?>
