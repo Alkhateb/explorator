@@ -1,20 +1,13 @@
 <html>
 <?php
 require_once('easybitcoin.php');
-$ekita = new Bitcoin('teknogeek', 'x', 'localhost', '31222');
-$hash = $ekita->getblockhash(5000);
+$tesla = new Bitcoin('tesla', 'swag', 'localhost', '1857');
+
+$tx = $tesla->gettransaction('6a668098447c9f4121533ed96dbe390efe4329b708d0bce8f58efbcd31aed2d0');
 
 echo '<pre>';
-echo print_r($ekita->getblock($hash, true), 1);
+echo print_r($tx, 1);
 echo '</pre>';
-
-$blockCount = $ekita->getblockcount();
-
-$con = mysqli_connect('localhost', 'root', '', 'ekita');
-
-for($i = 0; $i < $blockCount; $i ++)
-{
-
-}
+//$con = mysqli_connect('localhost', 'root', '', 'tesla');
 ?>
 </html>

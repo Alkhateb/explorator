@@ -1,24 +1,24 @@
 <?php
 require_once('easybitcoin.php');
-$ekita = new Bitcoin('teknogeek', 'x', 'localhost', '31222');
+$tesla = new Bitcoin('tesla', 'swag', 'localhost', '1857');
 $single = $_GET['single'];
-$blockCount = $ekita->getblockcount();
+$blockCount = $tesla->getblockcount();
 
 $lastBlocks = "";
 if($single == "false")
 {
     for($i = $blockCount; $i > $blockCount - 10; $i--)
     {
-        $blockHash = $ekita->getblockhash($i);
-        $info = $ekita->getblock($blockHash);
+        $blockHash = $tesla->getblockhash($i);
+        $info = $tesla->getblock($blockHash);
 
         $lastBlocks .= "<tr><td>" . $info['height'] . "</td><td>" . number_format($info['difficulty'], 3) . "</td><td>" . $info['confirmations'] . "</td></tr>";
     }
 }
 else
 {
-    $blockHash = $ekita->getblockhash($blockCount);
-    $info = $ekita->getblock($blockHash);
+    $blockHash = $tesla->getblockhash($blockCount);
+    $info = $tesla->getblock($blockHash);
 
     $lastBlocks = "<tr><td>" . $info['height'] . "</td><td>" . number_format($info['difficulty'], 3) . "</td><td>" . $info['confirmations'] . "</td></tr>";
 }

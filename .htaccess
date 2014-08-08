@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^blockexplorer/block/([^/]*)$ :63342/blockexplorer/block.php?hash=$1 [L]
